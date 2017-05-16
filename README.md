@@ -13,6 +13,7 @@ Every command will simply pop or dequeue however many arguments it needs from th
 | `any number` | put an integer in the main queue/stack (ex.: 34 will enqueue 34)              |
 | `%`          | peek at the front item of the queue or stack and put it in the argument queue |
 | `^`          | pop or dequeue an item and put it in the argument queue                       |
+| `,`          | discard a value from the queue/stack
 | `+`          | add two values                                                                |
 | `-`          | subtract two values                                                           |
 | `*`          | multiply two values                                                           |
