@@ -1,6 +1,8 @@
-# Python interpreter for the TabbyQ esolang
+# Python interpreter for the eWagon esolang
 # An interpreter running in an interpreted language... that sounds efficient!
 # Feel free to modify this file!
+
+# IMPORTant stuff
 from sys import stdout, argv
 from time import sleep
 
