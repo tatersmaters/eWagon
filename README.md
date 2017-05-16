@@ -47,17 +47,13 @@ It should run under Python 2 or 3.
 
 ## Examples
 
-Hello World:
-` "!dlrow ,olleH" { % ! "!" ^ ^ _ ^ } 0 ^ @ .`
+**Hello World:** ` "!dlrow ,olleH" { % ! "!" ^ ^ _ ^ } 0 ^ @ .`
 
-**Fibonacci:**
-``0 1 { ~ ^ % + % $ % ` 10000 ^ < ^ } .``
+**Fibonacci:** ``0 1 { ~ ^ % + % $ % ` 10000 ^ < ^ } .``
 
-**Truth-machine:**
-`& ^ [ { 1 ^ $ 1 ^ } ] 0 ^ $ .`
+**Truth-machine:** `& ^ [ { 1 ^ $ 1 ^ } ] 0 ^ $ .`
 
-**Cat (numerical input only):**
-`{ & ^ $ 1 ^ } .`
+**Cat (numerical input only):** `{ & ^ $ 1 ^ } .`
 
 ## Future Plans
 This is a list of things I plan to implement.
