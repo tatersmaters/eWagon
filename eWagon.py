@@ -46,7 +46,6 @@ ls = Stack() # Loop stack
 mode = 'queue'
 code = ''
 ip = 0 # Instruction pointer
-loop = 0 # Location of current loop
 
 def load(): # Load a file
 	if len(argv) < 2: error('No .ewg file specified.')
@@ -198,6 +197,7 @@ def interpret():
 				while 1:
 					if code[ip] == ']': break
 					ip += 1
+		
 		# Commands for which I defined functions
 		elif code[ip] == '~': queuemode()
 		elif code[ip] == '`': stackmode()
@@ -219,7 +219,7 @@ def interpret():
 		elif code[ip] == '&': numinput()
 		elif code[ip] == '.': exit()
 		ip += 1
-#		sleep(0.1)
+#		sleep(0.1) # Delay
 
 load()
 # Run!
