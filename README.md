@@ -46,8 +46,9 @@ To use the interpreter, open the terminal (or command prompt if you're using Win
 It should run under Python 2 or 3.
 
 ## Examples
+
 Hello World:
-`` "!dlrow ,olleH" { % ! "!" ^ ^ _ ^ } 0 ^ @ .`
+` "!dlrow ,olleH" { % ! "!" ^ ^ _ ^ } 0 ^ @ .`
 
 **Fibonacci:**
 ``0 1 { ~ ^ % + % $ % ` 10000 ^ < ^ } .``
