@@ -23,9 +23,9 @@ Every command will simply pop or dequeue however many arguments it needs from th
 | `<`          | push/enqueue a truthy value if one argument is less than the other            |
 | `“`          | enqueue or push the ASCII values of the characters between the `“”`           |
 | `$`          | print a number with a newline                                                 |
-| `!`          | print an ASCII value as a character with a newline                            |
+| `@`          | print an ASCII value as a character with a newline                            |
 | `#`          | print a number without a newline                                              |
-| `@`          | print an ASCII value as a character without a newline                         |
+| `!`          | print an ASCII value as a character without a newline                         |
 | `&`          | get numerical input                                                           |
 | `{`          | start a loop                                                                  |
 | `}`          | if argument is truthy, break loop, otherwise, continue looping                |
