@@ -28,7 +28,7 @@ Every command will simply pop or dequeue however many arguments it needs from th
 | `!`          | print an ASCII value as a character without a newline                         |
 | `&`          | get numerical input                                                           |
 | `{`          | start a loop                                                                  |
-| `}`          | if argument is truthy, break loop, otherwise, continue looping                |
+| `}`          | if argument is truthy, continue looping. Otherwise, break loop.               |
 | `[`          | if argument is truthy, execute the code between it and the next `]`           |
 | `]`          | end an if-statement                                                           |
 | `~`          | queue mode                                                                    |
