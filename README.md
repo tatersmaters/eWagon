@@ -35,7 +35,7 @@ Every command will simply pop or dequeue however many arguments it needs from th
 | `` ` ``      | stack mode                                                                    |
 | `.`          | end program                                                                   |
 
-At the moment, eWagon doesn’t support nested if-statements. Feel free to modify the interpreter to your liking, however!
+At the moment, eWagon doesn’t support nested if-statements. Feel free to modify the interpreter to your liking! Nested loops *should* work, though they are untested.
 
 ## The Interpreter
 
