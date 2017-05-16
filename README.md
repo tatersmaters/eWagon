@@ -37,6 +37,8 @@ Every command will simply pop or dequeue however many arguments it needs from th
 
 At the moment, eWagon doesn’t support nested if-statements. Feel free to modify the interpreter to your liking! Nested loops *should* work, though they are untested.
 
+All commands except for % and ^ will pull their arguments from the argument queue, and push the result to the main queue or stack, depending on mode.
+
 ## The Interpreter
 
 To use the interpreter, open the terminal (or command prompt if you're using Windows) and type this in the directory that `eWagon.py` is located:
