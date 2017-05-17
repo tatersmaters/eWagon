@@ -2,7 +2,7 @@
 
 ## Intro
 
-eWagon is an esoteric programming language based on queues and stacks. It stands for **E**solang **W**ithout **A** **Go**od **N**ame. It’s unique in that it has 2 storage modes: Queue Mode and Stack Mode. Using the `~` and `` ` `` commands pretty much dumps the contents of the queue into the stack, and vice versa, without changing the order. It also modifies the behavior of certain commands. Queue mode is activated by default when running a program.
+eWagon is an esoteric programming language based on queues and stacks. It stands for **E**solang **W**ithout **A** **Go**od **N**ame. It’s unique in that it has 2 storage modes: Queue Mode and Stack Mode. Using the `~` and `` ` `` commands pretty much dumps the contents of the queue into the stack, and vice versa, without changing the order. It also modifies the behavior of certain commands. Queue mode is activated by default when running a program. 
 
 ## Commands
 
@@ -10,10 +10,11 @@ Every command will simply pop or dequeue however many arguments it needs from th
 
 | Command      | What it does                                                                  |
 | ----------   | ----------------------------------------------------------------------------- |
-| `any number` | put an integer in the main queue/stack (ex.: 34 will enqueue 34)              |
+| `'`          | enqueue or push the number between the `''`
+| `“`          | enqueue or push the ASCII values of the characters between the `“”`           |
 | `%`          | peek at the front item of the queue or stack and put it in the argument queue |
 | `^`          | pop or dequeue an item and put it in the argument queue                       |
-| `,`          | discard a value from the queue/stack
+| `,`          | discard a value from the queue/stack                                          |
 | `+`          | add two values                                                                |
 | `-`          | subtract two values                                                           |
 | `*`          | multiply two values                                                           |
@@ -22,7 +23,6 @@ Every command will simply pop or dequeue however many arguments it needs from th
 | `_`          | push/enqueue a truthy value if the two arguments are not equal                |
 | `>`          | push/enqueue a truthy value if one argument is greater than the other         |
 | `<`          | push/enqueue a truthy value if one argument is less than the other            |
-| `“`          | enqueue or push the ASCII values of the characters between the `“”`           |
 | `$`          | print a number with a newline                                                 |
 | `@`          | print an ASCII value as a character with a newline                            |
 | `#`          | print a number without a newline                                              |
@@ -32,13 +32,17 @@ Every command will simply pop or dequeue however many arguments it needs from th
 | `}`          | if argument is truthy, continue looping. Otherwise, break loop.               |
 | `[`          | if argument is truthy, execute the code between it and the next `]`           |
 | `]`          | end an if-statement                                                           |
+| `(`          | begin comment                                                                 |
+| `)`          | end comment                                                                   |
 | `~`          | queue mode                                                                    |
 | `` ` ``      | stack mode                                                                    |
 | `.`          | end program                                                                   |
 
-At the moment, eWagon doesn’t support nested if-statements. Feel free to modify the interpreter to your liking! Nested loops *should* work, though they are untested.
+At the moment, eWagon doesn’t support nested if-statements. Feel free to modify the interpreter to your liking! Nested loops are supported.
 
 All commands except for % and ^ will pull their arguments from the argument queue, and push the result to the main queue or stack, depending on mode.
+
+Whitespace (spaces, linebreaks and tabs) is supported, as well as multi-line comments.
 
 ## The Interpreter
 
@@ -50,13 +54,13 @@ It should run under Python 2 or 3.
 
 ## Examples
 
-**Hello World:** ` "!dlrow ,olleH" { % ! "!" ^ ^ _ ^ } 0 ^ @ .`
+**Hello World:** `"!dlrow ,olleH"{%!"!"^^_^}'0'^@.`
 
-**Fibonacci:** ``0 1 { ~ ^ % + % $ % ` 10000 ^ < ^ } .``
+**Fibonacci:** ``'0''1'{~^%+%$%`'10000'^<^}.``
 
-**Truth-machine:** `& ^ [ { 1 ^ $ 1 ^ } ] 0 ^ $ .`
+**Truth-machine:** `&^[{'1'^$'1'^}]'0'^$.`
 
-**Cat (numerical input only):** `{ & ^ $ 1 ^ } .`
+**Cat (numerical input only):** `{&^$'1'^}.`
 
 ## Future Plans
 This is a list of things I plan to implement.
