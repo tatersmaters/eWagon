@@ -55,7 +55,7 @@ def load(): # Load a file
 	global code
 	filepath = argv[1]
 	c = open(filepath, 'r')
-	code = c.read().replace('\n', ' ')
+	code = c.read().replace('\n', '')
 
 def argerror(args, cmd):
 	if len(aq.q) < args: error('Not enough arguments supplied to \"%s\".' % cmd)
@@ -161,22 +161,30 @@ def showchar():
 	stdout.write(chr(aq.dq()))
 
 def numinput():
-	if mode == 'queue': mq.eq(int(input()))
-	elif mode == 'stack': ms.push(int(input()))
+	num = input()
+	if not num.isdigit(): error('Attempt to provide string as input')
+	if mode == 'queue': mq.eq(int(num))
+	elif mode == 'stack': ms.push(int(num()))
 
 def interpret():
 	global ip
 	while 1:
 #		print(':', code[ip], ip, mq.q, ms.s, aq.q, mode) # Prints some debug info
 		# Commands/features that depend on the instruction pointer
-		# Numbers
-		if code[ip].isdigit():
-			num = ''
+		# Comments
+		if code[ip] == '(':
 			while 1:
-				if code[ip] == ' ': break
+				if code[ip] == ')': break
+				ip += 1
+		# Numbers
+		elif code[ip] == '\'':
+			num = ''
+			ip += 1
+			while 1:
+				if code[ip] == '\'': break
 				num += code[ip]
 				ip += 1
-			if mode == 'queue':	mq.eq(int(num))
+			if mode == 'queue': mq.eq(int(num))
 			elif mode == 'stack': ms.push(int(num))
 		# Strings
 		elif code[ip] == '"':
@@ -199,7 +207,6 @@ def interpret():
 				while 1:
 					if code[ip] == ']': break
 					ip += 1
-		
 		# Commands for which I defined functions
 		elif code[ip] == '~': queuemode()
 		elif code[ip] == '`': stackmode()
