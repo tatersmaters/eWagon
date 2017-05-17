@@ -55,7 +55,7 @@ def load(): # Load a file
 	global code
 	filepath = argv[1]
 	c = open(filepath, 'r')
-	code = c.read().replace('\n', '')
+	code = c.read()
 
 def argerror(args, cmd):
 	if len(aq.q) < args: error('Not enough arguments supplied to \"%s\".' % cmd)
