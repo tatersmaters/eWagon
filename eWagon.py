@@ -45,13 +45,15 @@ mq = Queue() # Main queue
 aq = Queue() # Argument queue
 ms = Stack() # Main stack
 ls = Stack() # Loop stack
+funcs = {} # Stores the locations of any functions
+previp = 0
 mode = 'queue'
 code = ''
 ip = 0 # Instruction pointer
 
 def load(): # Load a file
 	if len(argv) < 2: error('No .ewg file specified.')
-	if argv[1][-3:] != 'ewg': error('File specified is not a .ewg file.')
+	if argv[1][-3:] != 'ews': error('File specified is not a .ews file.')
 	global code
 	filepath = argv[1]
 	c = open(filepath, 'r')
@@ -61,6 +63,7 @@ def argerror(args, cmd):
 	if len(aq.q) < args: error('Not enough arguments supplied to \"%s\".' % cmd)
 
 # Define all the commands
+
 def queuemode():
 	global mode
 	if mode != 'queue':
@@ -108,6 +111,12 @@ def div():
 	if mode == 'queue': mq.eq(aq.dq() / aq.dq())
 	elif mode == 'stack': ms.push(aq.dq() / aq.dq())
 
+def modulo():
+	argerror(2, '|')
+	if 0 in aq.q: error('Attempt to modulo by zero.')
+	if mode == 'queue': mq.eq(aq.dq() % aq.dq())
+	elif mode == 'stack': ms.push(aq.dq() % aq.dq())
+
 def equal():
 	argerror(2, '=')
 	if mode == 'queue':
@@ -146,30 +155,30 @@ def less():
 
 def printnum():
 	argerror(1, '$')
-	print(int(aq.dq()))
+	print(aq.dq())
 
 def shownum():
 	argerror(1, '#')
-	stdout.write(int(aq.dq()))
+	stdout.write(aq.dq())
 
 def printchar():
 	argerror(1, '@')
-	print(chr(aq.dq()))
+	print(chr(int(aq.dq())))
 
 def showchar():
 	argerror(1, '!')
-	stdout.write(chr(aq.dq()))
+	stdout.write(chr(int(aq.dq())))
 
 def numinput():
 	num = input()
 	if not num.isdigit(): error('Attempt to provide string as input')
-	if mode == 'queue': mq.eq(int(num))
-	elif mode == 'stack': ms.push(int(num()))
+	if mode == 'queue': mq.eq(num)
+	elif mode == 'stack': ms.push(num)
 
 def interpret():
 	global ip
 	while 1:
-#		print(':', code[ip], ip, mq.q, ms.s, aq.q, mode) # Prints some debug info
+		print(':', code[ip], ip, mq.q, ms.s, aq.q, funcs, mode) # Prints some debug info
 		# Commands/features that depend on the instruction pointer
 		# Comments
 		if code[ip] == '(':
@@ -184,8 +193,8 @@ def interpret():
 				if code[ip] == '\'': break
 				num += code[ip]
 				ip += 1
-			if mode == 'queue': mq.eq(int(num))
-			elif mode == 'stack': ms.push(int(num))
+			if mode == 'queue': mq.eq(float(num))
+			elif mode == 'stack': ms.push(float(num))
 		# Strings
 		elif code[ip] == '"':
 			ip += 1
@@ -207,6 +216,7 @@ def interpret():
 				while 1:
 					if code[ip] == ']': break
 					ip += 1
+		
 		# Commands for which I defined functions
 		elif code[ip] == '~': queuemode()
 		elif code[ip] == '`': stackmode()
