@@ -178,7 +178,7 @@ def numinput():
 def interpret():
 	global ip
 	while 1:
-		print(':', code[ip], ip, mq.q, ms.s, aq.q, funcs, mode) # Prints some debug info
+#		print(':', code[ip], ip, mq.q, ms.s, aq.q, funcs, mode) # Prints some debug info
 		# Commands/features that depend on the instruction pointer
 		# Comments
 		if code[ip] == '(':
