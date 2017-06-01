@@ -105,13 +105,13 @@ def mul():
 
 def div():
 	argerror(2, '-')
-	if 0 in aq.q: error('Attempt to divide by zero.')
+	if 0 in aq.q[-1,-2]: error('Attempt to divide by zero.')
 	if mode == 'queue': mq.eq(aq.dq() / aq.dq())
 	elif mode == 'stack': ms.push(aq.dq() / aq.dq())
 
 def modulo():
 	argerror(2, '|')
-	if 0 in aq.q: error('Attempt to modulo by zero.')
+	if 0 in aq.q[-1,-2]: error('Attempt to modulo by zero.')
 	if mode == 'queue': mq.eq(aq.dq() % aq.dq())
 	elif mode == 'stack': ms.push(aq.dq() % aq.dq())
 
