@@ -15,13 +15,16 @@ def error(text):
 class Queue():
 	def __init__(self):
 		self.q = []
+	def lenerror(self):
+		if len(self.deque) == 0: error('Attempt to dequeue from empty deque.')
 	def eq(self, x):
 		self.q.append(int(x))
 	def dq(self):
-		if len(self.q) < 1: error('Attempt to dequeue from empty queue.')
+		self.lenerror()
 		return self.q.pop(0)
 	def peek(self):
-		if len(self.q) < 1: error('Attempt to peek from empty queue.')
+		self.lenerror()
+		self.lenerror()
 		return self.q[0]
 	def clr(self):
 		self.q = []
@@ -30,13 +33,15 @@ class Queue():
 class Stack():
 	def __init__(self):
 		self.s = []
+	def lenerror(self):
+		if len(self.deque) == 0: error('Attempt to pop from empty stack.')
 	def push(self, x):
 		self.s.append(int(x))
 	def pop(self):
-		if len(self.s) < 1: error('Attempt to pop from empty stack.')
+		self.lenerror()
 		return self.s.pop(-1)
 	def peek(self):
-		if len(self.s) < 1: error('Attempt to peek from empty stack.')
+		self.lenerror()
 		return self.s[-1]
 	def clr(self):
 		self.s = []
@@ -105,13 +110,13 @@ def mul():
 
 def div():
 	argerror(2, '-')
-	if 0 in aq.q[-1,-2]: error('Attempt to divide by zero.')
+	if 0 in aq.q: error('Attempt to divide by zero.')
 	if mode == 'queue': mq.eq(aq.dq() / aq.dq())
 	elif mode == 'stack': ms.push(aq.dq() / aq.dq())
 
 def modulo():
 	argerror(2, '|')
-	if 0 in aq.q[-1,-2]: error('Attempt to modulo by zero.')
+	if 0 in aq.q: error('Attempt to modulo by zero.')
 	if mode == 'queue': mq.eq(aq.dq() % aq.dq())
 	elif mode == 'stack': ms.push(aq.dq() % aq.dq())
 
@@ -173,6 +178,13 @@ def numinput():
 	if mode == 'queue': mq.eq(num)
 	elif mode == 'stack': ms.push(num)
 
+def strinput():
+	string = input()
+	if mode == 'queue':
+		for i in string: mq.eq(ord(i))
+	elif mode == 'stack':
+		for i in string: ms.push(ord(i))
+
 def interpret():
 	global ip
 	while 1:
@@ -229,6 +241,7 @@ def interpret():
 		elif code[ip] == '@': printchar()
 		elif code[ip] == '!': showchar()
 		elif code[ip] == '&': numinput()
+		elif code[ip] == '?': strinput()
 		elif code[ip] == '.': exit()
 		ip += 1
 #		sleep(0.1) # Delay
