@@ -16,7 +16,7 @@ class Queue():
 	def __init__(self):
 		self.q = []
 	def eq(self, x):
-		self.q.append(x)
+		self.q.append(int(x))
 	def dq(self):
 		if len(self.q) < 1: error('Attempt to dequeue from empty queue.')
 		return self.q.pop(0)
@@ -31,7 +31,7 @@ class Stack():
 	def __init__(self):
 		self.s = []
 	def push(self, x):
-		self.s.append(x)
+		self.s.append(int(x))
 	def pop(self):
 		if len(self.s) < 1: error('Attempt to pop from empty stack.')
 		return self.s.pop(-1)
@@ -45,15 +45,13 @@ mq = Queue() # Main queue
 aq = Queue() # Argument queue
 ms = Stack() # Main stack
 ls = Stack() # Loop stack
-funcs = {} # Stores the locations of any functions
-previp = 0
 mode = 'queue'
 code = ''
 ip = 0 # Instruction pointer
 
 def load(): # Load a file
-	if len(argv) < 2: error('No .ewg file specified.')
-	if argv[1][-3:] != 'ews': error('File specified is not a .ews file.')
+	if len(argv) < 2: error('No .ew1 file specified.')
+	if argv[1][-3:] != 'ew1': error('File specified is not a .ew1 file.')
 	global code
 	filepath = argv[1]
 	c = open(filepath, 'r')
@@ -163,38 +161,33 @@ def shownum():
 
 def printchar():
 	argerror(1, '@')
-	print(chr(int(aq.dq())))
+	print(chr(aq.dq()))
 
 def showchar():
 	argerror(1, '!')
-	stdout.write(chr(int(aq.dq())))
+	stdout.write(chr(aq.dq()))
 
 def numinput():
 	num = input()
-	if not num.isdigit(): error('Attempt to provide string as input')
+	if not num.isdigit(): error('Attempt to provide string or float as input.')
 	if mode == 'queue': mq.eq(num)
 	elif mode == 'stack': ms.push(num)
 
 def interpret():
 	global ip
 	while 1:
-#		print(':', code[ip], ip, mq.q, ms.s, aq.q, funcs, mode) # Prints some debug info
+		# print(':', code[ip], ip, mq.q, ms.s, aq.q, mode) # Prints some debug info
 		# Commands/features that depend on the instruction pointer
-		# Comments
-		if code[ip] == '(':
-			while 1:
-				if code[ip] == ')': break
-				ip += 1
 		# Numbers
-		elif code[ip] == '\'':
+		if code[ip] == '\'':
 			num = ''
 			ip += 1
 			while 1:
 				if code[ip] == '\'': break
 				num += code[ip]
 				ip += 1
-			if mode == 'queue': mq.eq(float(num))
-			elif mode == 'stack': ms.push(float(num))
+			if mode == 'queue': mq.eq(num)
+			elif mode == 'stack': ms.push(num)
 		# Strings
 		elif code[ip] == '"':
 			ip += 1
